@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Solutions | Sistemas de Gestión Empresarial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- SDK de EmailJS -->
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        // Inicialización de EmailJS
+        (function() {
+            emailjs.init("Az4Z79UOpYiKNSAGA");
+        })();
+    </script>
+    <style>
+        :root {
+            --ds-green: #00FF00;
+            --ds-glow: #39FF14;
+            --ds-black: #000000;
+            --ds-silver: #C0C0C0;
+            --forest: #023020;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        body {
+            background: var(--forest);
+            color: var(--ds-silver);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            background: rgba(2, 48, 32, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--ds-black);
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--ds-green);
+        }
+        
+        .logo-icon::before, .logo-icon::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--ds-green);
+            border-radius: 50%;
+        }
+        
+        .logo-icon::before {
+            top: 8px;
+            left: 8px;
+        }
+        
+        .logo-icon::after {
+            bottom: 8px;
+            right: 8px;
+        }
+        
+        .logo-icon-inner {
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border: 2px solid var(--ds-green);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .logo-icon-inner::before, .logo-icon-inner::after {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--ds-green);
+            border-radius: 50%;
+        }
+        
+        .logo-icon-inner::before {
+            top: -4px;
+            left: -4px;
+        }
+        
+        .logo-icon-inner::after {
+            bottom: -4px;
+            right: -4px;
+        }
+        
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--ds-green);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--ds-silver);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding: 8px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ds-green);
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--ds-green);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--forest) 0%, #001a0f 100%);
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--ds-green);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            text-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: var(--ds-silver);
+            max-width: 550px;
+            line-height: 1.8;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--ds-green);
+            color: var(--ds-black);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: var(--ds-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(57, 255, 20, 0.8);
+            filter: drop-shadow(0 0 8px var(--ds-glow));
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--ds-silver);
+            border: 2px solid var(--ds-green);
+            box-shadow: none;
+        }
+        
+        .cta-button.secondary:hover {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--ds-green);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+        }
+        
+        /* Canvas Animation Container */
+        .hero-animation {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+        }
+        
+        /* Services Section - Enhanced */
+        .services {
+            padding: 6rem 5%;
+            background: var(--ds-black);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 0, 0.05) 0%, transparent 30%),
+                url('image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="none" stroke="%23023020" stroke-width="1"/></svg>');
+            background-size: 150px;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--ds-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title p {
+            color: var(--ds-silver);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Service Filters */
+        .service-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .filter-btn {
+            background: rgba(15, 15, 15, 0.7);
+            border: 1px solid rgba(0, 255, 0, 0.2);
+            color: var(--ds-silver);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 500;
+            backdrop-filter: blur(4px);
+        }
+        
+        .filter-btn:hover {
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--ds-green);
+        }
+        
+        .filter-btn.active {
+            background: var(--ds-green);
+            color: var(--ds-black);
+            border-color: var(--ds-green);
+            font-weight: 700;
+        }
+        
+        /* Enhanced Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .service-card {
+            background: rgba(15, 15, 15, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            position: relative;
+            transform: translateY(0);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--ds-green);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+        }
+        
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--ds-green);
+            color: var(--ds-black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            margin: 1.5rem auto;
+            color: var(--ds-green);
+            position: relative;
+            display: block;
+            text-align: center;
+            height: 100px;
+        }
+        
+        .service-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--ds-green);
+            text-align: center;
+            padding: 0 1.5rem;
+        }
+        
+        .service-description {
+            padding: 0 1.5rem;
+            color: var(--ds-silver);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        
+        .service-features {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.8rem;
+            color: var(--ds-silver);
+        }
+        
+        .feature-item i {
+            color: var(--ds-green);
+            margin-right: 0.7rem;
+            margin-top: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .service-pricing {
+            background: rgba(0, 255, 0, 0.05);
+            border-top: 1px solid rgba(0, 255, 0, 0.1);
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .price {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--ds-green);
+            margin: 0.5rem 0;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--ds-silver);
+            font-weight: 400;
+        }
+        
+        .price-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+        
+        .price-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed rgba(0, 255, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .price-features li i {
+            color: var(--ds-green);
+            margin-right: 0.7rem;
+        }
+        
+        .price-features li.inactive {
+            color: rgba(192, 192, 192, 0.5);
+        }
+        
+        .price-features li.inactive i {
+            color: rgba(0, 255, 0, 0.2);
+        }
+        
+        .price-action {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        /* Service Details Tabs */
+        .service-details {
+            padding: 0 1.5rem 1.5rem;
+        }
+        
+        .service-tabs {
+            display: flex;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .service-tab {
+            padding: 0.7rem 1.2rem;
+            cursor: pointer;
+            color: var(--ds-silver);
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+        }
+        
+        .service-tab.active {
+            color: var(--ds-green);
+            font-weight: 600;
+        }
+        
+        .service-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--ds-green);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .use-cases {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        .use-case {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 6px;
+            border-left: 2px solid var(--ds-green);
+        }
+        
+        .use-case h4 {
+            color: var(--ds-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Comparison Table */
+        .comparison-section {
+            padding: 3rem 0;
+        }
+        
+        .comparison-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .comparison-title h3 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--ds-green);
+            font-size: 1.8rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(15, 15, 15, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .comparison-table th {
+            background: rgba(0, 255, 0, 0.1);
+            padding: 1.2rem;
+            text-align: left;
+            color: var(--ds-green);
+            font-family: 'Orbitron', sans-serif;
+        }
+        
+        .comparison-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.05);
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-name {
+            font-weight: 500;
+            color: var(--ds-silver);
+        }
+        
+        .feature-check {
+            color: var(--ds-green);
+            font-weight: bold;
+        }
+        
+        .feature-cross {
+            color: #ff4444;
+        }
+        
+        /* Contact Form */
+        .service-contact {
+            background: rgba(15, 15, 15, 0.7);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 3rem;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            position: relative; /* Añadido */
+            z-index: 3; /* Asegurar que esté por encima del fondo */
+        }
+        
+        .contact-title {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--ds-green);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+        }
+        
+        .contact-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            position: relative; /* Añadido */
+            z-index: 4; /* Asegurar que esté por encima */
+        }
+        
+        .form-group {
+            margin-bottom: 1.2rem;
+            position: relative; /* Añadido */
+            z-index: 5; /* Asegurar que los inputs sean accesibles */
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--ds-silver);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            border-radius: 4px;
+            color: var(--ds-silver);
+            font-family: 'Roboto', sans-serif;
+            position: relative; /* Añadido */
+            z-index: 10; /* Asegurar que sean interactuables */
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            grid-column: 1 / -1;
+            background: var(--ds-green);
+            color: var(--ds-black);
+            border: none;
+            padding: 1rem;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            position: relative; /* Añadido */
+            z-index: 10; /* Asegurar que sea interactuable */
+        }
+        
+        .submit-btn:hover {
+            background: var(--ds-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+        }
+        
+        /* Nuevos estilos para mensajes */
+        .form-message {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+            position: relative; /* Añadido */
+            z-index: 10; /* Asegurar visibilidad */
+        }
+        
+        .form-message.success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid var(--ds-green);
+            color: var(--ds-green);
+        }
+        
+        .form-message.error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+        
+        .form-message.sending {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid #0096ff;
+            color: #0096ff;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background: var(--forest);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 80% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 30%),
+                url('image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><polygon points="100,20 40,180 190,80 10,80 160,180" fill="none" stroke="%23023020" stroke-width="2"/></svg>');
+            background-size: 200px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-card {
+            background: rgba(2, 30, 20, 0.7);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--ds-green);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ds-green);
+            position: relative;
+        }
+        
+        .feature-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--ds-green);
+        }
+        
+        .feature-card p {
+            color: var(--ds-silver);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 5%;
+            background: var(--forest);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .testimonials::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 70% 30%, rgba(0, 255, 0, 0.05) 0%, transparent 30%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><path d="M20,20 L130,20 L130,130 L20,130 Z" fill="none" stroke="%23023020" stroke-width="1" stroke-dasharray="5 3"/></svg>');
+            background-size: 150px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-card {
+            background: rgba(2, 30, 20, 0.7);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 255, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ds-green), var(--forest));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--ds-black);
+            font-weight: bold;
+        }
+        
+        .testimonial-info h4 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--ds-green);
+            margin-bottom: 0.3rem;
+        }
+        
+        .testimonial-info p {
+            color: var(--ds-silver);
+            font-size: 0.9rem;
+        }
+        
+        .testimonial-content {
+            color: var(--ds-silver);
+            font-style: italic;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--forest);
+            padding: 4rem 5% 2rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 90% 10%, rgba(0, 255, 0, 0.05) 0%, transparent 30%),
+                url('image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150"><path d="M20,20 L130,20 L130,130 L20,130 Z" fill="none" stroke="%23023020" stroke-width="1" stroke-dasharray="5 3"/></svg>');
+            background-size: 150px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--ds-green);
+        }
+        
+        .footer-column p, .footer-column a {
+            color: var(--ds-silver);
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--ds-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0, 255, 0, 0.1);
+            color: var(--ds-green);
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--ds-green);
+            color: var(--ds-black);
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: var(--ds-green);
+            width: 20px;
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(0, 255, 0, 0.1);
+            color: var(--ds-silver);
+            font-size: 0.9rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-animation {
+                opacity: 0.3;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            nav ul li a {
+                font-size: 0.9rem;
+            }
+            
+            .hero {
+                padding-top: 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-animation {
+                display: none;
+            }
+            
+            .service-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .service-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="logo-icon-inner"></div>
+            </div>
+            <div class="logo-text">DEV SOLUTIONS</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">INICIO</a></li>
+                <li><a href="#"style="color: var(--ds-green);">SERVICIOS</a></li>
+                <li><a href="contact.html">CONTACTO</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <!-- Animation Canvas Container -->
+        <div class="hero-animation">
+            <canvas id="particle-canvas"></canvas>
+        </div>
+        
+        <div class="hero-content">
+            <h1>SISTEMAS DE GESTIÓN EMPRESARIAL</h1>
+            <p>Desarrollamos soluciones personalizadas para optimizar ventas, control de inventarios y procesos empresariales. Transforma tu negocio con tecnología hecha a medida.</p>
+            <div class="hero-buttons">
+                <a href="#services" class="cta-button">Nuestros Servicios</a>
+                <a href="#contact" class="cta-button secondary">Solicitar Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section - Enhanced -->
+    <section id="services" class="services">
+        <div class="section-title">
+            <h2>Nuestros Servicios</h2>
+            <p>Soluciones tecnológicas diseñadas específicamente para optimizar tu negocio y maximizar tus resultados</p>
+        </div>
+        
+        <!-- Service Filters -->
+        <div class="service-filters">
+            <button class="filter-btn active" data-filter="all">Todos los Servicios</button>
+            <button class="filter-btn" data-filter="sales">Sistemas de Venta</button>
+            <button class="filter-btn" data-filter="inventory">Control de Inventario</button>
+            <button class="filter-btn" data-filter="web">Desarrollo Web</button>
+            <button class="filter-btn" data-filter="mobile">Aplicaciones Móviles</button>
+        </div>
+        
+        <!-- Services Grid -->
+        <div class="services-grid">
+            <!-- Sistema de Ventas -->
+            <div class="service-card" data-category="sales">
+                <span class="service-badge">Más Popular</span>
+                <div class="service-icon">
+                    <i class="fas fa-cash-register"></i>
+                </div>
+                <h3>Sistema Integral de Ventas</h3>
+                <div class="service-description">
+                    Plataforma completa para gestión de ventas, facturación electrónica, control de inventario y reportes financieros en tiempo real. Diseñado para empresas de todos los tamaños.
+                </div>
+                
+                <div class="service-pricing">
+                    <div class="pricing-header">
+                        <h4>Planes Disponibles</h4>
+                        <div class="price">$200<span>/mes</span></div>
+                        <p>Ideal para pequeñas empresas</p>
+                    </div>
+                    
+                    <ul class="price-features">
+                        <li><i class="fas fa-check-circle"></i> Módulo de facturación electrónica</li>
+                        <li><i class="fas fa-check-circle"></i> Control de inventario básico</li>
+                        <li><i class="fas fa-check-circle"></i> Reportes diarios y mensuales</li>
+                        <li><i class="fas fa-check-circle"></i> Soporte técnico básico (8/5)</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con 1 plataforma de pago</li>
+                        <li><i class="fas fa-check-circle"></i> Gestión de usuarios y permisos</li>
+                        <li><i class="fas fa-check-circle"></i> Base de datos gestionada con phpMyAdmin</li>
+                    </ul>
+                    
+                    <div class="price-action">
+                        <a href="#contact" class="cta-button">Solicitar Información</a>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-tabs">
+                        <div class="service-tab active" data-tab="features">Características</div>
+                        <div class="service-tab" data-tab="use-cases">Casos de Uso</div>
+                        <div class="service-tab" data-tab="tech">Tecnología</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="features-content">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Facturación electrónica certificada con SRI</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Control de inventario en tiempo real</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Panel de administración intuitivo</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Integración con principales pasarelas de pago</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Reportes personalizables y exportables</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Multi-usuario con roles y permisos</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos MySQL gestionada con phpMyAdmin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="use-cases-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>Tiendas minoristas</h4>
+                                <p>Sistema implementado en 15 tiendas minoristas que necesitaban un control preciso de inventario y ventas, reduciendo errores en un 75%.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Servicios profesionales</h4>
+                                <p>Solución adaptada para estudios contables y legales para gestión de facturas y clientes con integración contable automática.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>E-commerce</h4>
+                                <p>Integración con plataformas de comercio electrónico para sincronización de inventario y órdenes de venta.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="tech-content">
+                        <div class="feature-item">
+                            <i class="fas fa-microchip"></i>
+                            <div>Arquitectura basada en microservicios</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos MySQL gestionada con phpMyAdmin</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <div>Seguridad SSL/TLS y encriptación AES-256</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-sync"></i>
+                            <div>Sincronización en tiempo real con respaldos automáticos</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile"></i>
+                            <div>Interfaz responsive para todos los dispositivos</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-tools"></i>
+                            <div>Herramientas de administración con acceso a phpMyAdmin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Control de Inventario -->
+            <div class="service-card" data-category="inventory">
+                <span class="service-badge">Novedad</span>
+                <div class="service-icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <h3>Sistema Avanzado de Inventario</h3>
+                <div class="service-description">
+                    Solución integral para gestión de stock, alertas de reposición, seguimiento de productos y análisis de rotación con inteligencia artificial.
+                </div>
+                
+                <div class="service-pricing">
+                    <div class="pricing-header">
+                        <h4>Planes Disponibles</h4>
+                        <div class="price">$500<span>/mes</span></div>
+                        <p>Recomendado para medianas empresas</p>
+                    </div>
+                    
+                    <ul class="price-features">
+                        <li><i class="fas fa-check-circle"></i> Gestión avanzada de stock</li>
+                        <li><i class="fas fa-check-circle"></i> Alertas inteligentes de reposición</li>
+                        <li><i class="fas fa-check-circle"></i> Análisis de rotación y tendencias</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con múltiples puntos de venta</li>
+                        <li><i class="fas fa-check-circle"></i> Soporte técnico premium (24/7)</li>
+                        <li><i class="fas fa-check-circle"></i> Análisis predictivo de demanda</li>
+                        <li><i class="fas fa-check-circle"></i> Gestión de base de datos con phpMyAdmin</li>
+                    </ul>
+                    
+                    <div class="price-action">
+                        <a href="#contact" class="cta-button">Solicitar Información</a>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-tabs">
+                        <div class="service-tab active" data-tab="features">Características</div>
+                        <div class="service-tab" data-tab="use-cases">Casos de Uso</div>
+                        <div class="service-tab" data-tab="tech">Tecnología</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="features-content">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Control de inventario multi-almacén</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Alertas inteligentes de reposición</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Análisis predictivo de tendencias</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Integración con sistemas de punto de venta</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Control de lotes y fechas de vencimiento</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Dashboard de análisis en tiempo real</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos gestionada con phpMyAdmin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="use-cases-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>Distribuidores mayoristas</h4>
+                                <p>Implementado en empresas distribuidoras para gestionar múltiples almacenes y optimizar la logística de reparto.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Farmacias</h4>
+                                <p>Sistema adaptado para control de medicamentos, fechas de vencimiento y alertas de reposición crítica.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Manufactura</h4>
+                                <p>Gestión de materiales, control de producción y seguimiento de insumos en fábricas de mediano tamaño.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="tech-content">
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <div>Algoritmos de predicción de demanda con IA</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-qrcode"></i>
+                            <div>Integración con lectores de códigos de barras y QR</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-project-diagram"></i>
+                            <div>Arquitectura modular escalable</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <div>Visualización avanzada de datos con D3.js</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-server"></i>
+                            <div>Infraestructura en la nube con AWS</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos MySQL gestionada con phpMyAdmin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desarrollo Web -->
+            <div class="service-card" data-category="web">
+                <div class="service-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Desarrollo Web Profesional</h3>
+                <div class="service-description">
+                    Páginas web corporativas, tiendas online y portales empresariales con diseño responsive y funcionalidades avanzadas para tu negocio.
+                </div>
+                
+                <div class="service-pricing">
+                    <div class="pricing-header">
+                        <h4>Paquetes Disponibles</h4>
+                        <div class="price">$800<span>único</span></div>
+                        <p>Precio desde - Proyecto completo</p>
+                    </div>
+                    
+                    <ul class="price-features">
+                        <li><i class="fas fa-check-circle"></i> Sitio web responsive (móvil y escritorio)</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con redes sociales</li>
+                        <li><i class="fas fa-check-circle"></i> Optimización SEO básica</li>
+                        <li><i class="fas fa-check-circle"></i> Formulario de contacto funcional</li>
+                        <li><i class="fas fa-check-circle"></i> Hosting por 1 año incluido</li>
+                        <li><i class="fas fa-check-circle"></i> Mantenimiento mensual opcional</li>
+                        <li><i class="fas fa-check-circle"></i> Base de datos gestionada con phpMyAdmin</li>
+                    </ul>
+                    
+                    <div class="price-action">
+                        <a href="#contact" class="cta-button">Solicitar Presupuesto</a>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-tabs">
+                        <div class="service-tab active" data-tab="features">Características</div>
+                        <div class="service-tab" data-tab="use-cases">Casos de Uso</div>
+                        <div class="service-tab" data-tab="tech">Tecnología</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="features-content">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Diseño web personalizado y moderno</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Desarrollo responsive para todos los dispositivos</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Optimización para motores de búsqueda (SEO)</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Integración con herramientas de análisis</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Formularios de contacto y newsletter</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Documentación completa del proyecto</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos gestionada con phpMyAdmin para CMS</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="use-cases-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>Sitios corporativos</h4>
+                                <p>Desarrollo de sitios web corporativos para presentación de empresas con secciones de servicios, equipo y contacto.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Tiendas online</h4>
+                                <p>Plataformas de comercio electrónico completas con pasarelas de pago integradas y gestión de inventario.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Portales de clientes</h4>
+                                <p>Desarrollo de áreas privadas para clientes con acceso a información y servicios exclusivos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="tech-content">
+                        <div class="feature-item">
+                            <i class="fas fa-html5"></i>
+                            <div>HTML5, CSS3 y JavaScript moderno</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-react"></i>
+                            <div>Frameworks modernos (React, Vue, Angular)</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-wordpress"></i>
+                            <div>WordPress personalizado con phpMyAdmin</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>Pruebas de usabilidad en múltiples dispositivos</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bolt"></i>
+                            <div>Optimización de velocidad y rendimiento</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-tools"></i>
+                            <div>Acceso a phpMyAdmin para gestión de base de datos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aplicaciones Móviles -->
+            <div class="service-card" data-category="mobile">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Aplicaciones Móviles Empresariales</h3>
+                <div class="service-description">
+                    Aplicaciones iOS y Android para gestión remota de ventas, inventario y seguimiento de operaciones desde cualquier lugar.
+                </div>
+                
+                <div class="service-pricing">
+                    <div class="pricing-header">
+                        <h4>Planes Disponibles</h4>
+                        <div class="price">$1500<span>único</span></div>
+                        <p>Precio desde - Proyecto completo</p>
+                    </div>
+                    
+                    <ul class="price-features">
+                        <li><i class="fas fa-check-circle"></i> Aplicación nativa para iOS y Android</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con tu sistema empresarial</li>
+                        <li><i class="fas fa-check-circle"></i> Diseño UI/UX personalizado</li>
+                        <li><i class="fas fa-check-circle"></i> Publicación en tiendas oficiales</li>
+                        <li><i class="fas fa-check-circle"></i> Soporte técnico post-lanzamiento</li>
+                        <li><i class="fas fa-check-circle"></i> Actualizaciones menores incluidas</li>
+                        <li><i class="fas fa-check-circle"></i> Integración con base de datos MySQL/phpMyAdmin</li>
+                    </ul>
+                    
+                    <div class="price-action">
+                        <a href="#contact" class="cta-button">Solicitar Presupuesto</a>
+                    </div>
+                </div>
+                
+                <div class="service-details">
+                    <div class="service-tabs">
+                        <div class="service-tab active" data-tab="features">Características</div>
+                        <div class="service-tab" data-tab="use-cases">Casos de Uso</div>
+                        <div class="service-tab" data-tab="tech">Tecnología</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="features-content">
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Aplicación nativa para iOS y Android</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Diseño de interfaz intuitiva y moderna</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Integración con sistemas empresariales existentes</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Sincronización offline/online inteligente</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Notificaciones push personalizadas</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check"></i>
+                            <div>Panel de administración web incluido</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Integración con bases de datos MySQL y phpMyAdmin</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="use-cases-content">
+                        <div class="use-cases">
+                            <div class="use-case">
+                                <h4>Ventas en campo</h4>
+                                <p>Aplicaciones para vendedores externos con acceso a catálogos, gestión de pedidos y sincronización en tiempo real.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Control de inventario móvil</h4>
+                                <p>Soluciones para conteo de inventario con lectores de códigos de barras integrados en dispositivos móviles.</p>
+                            </div>
+                            <div class="use-case">
+                                <h4>Servicio al cliente</h4>
+                                <p>Aplicaciones para técnicos de campo con acceso a historial de clientes y gestión de tickets de servicio.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="tech-content">
+                        <div class="feature-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>Desarrollo nativo con Swift (iOS) y Kotlin (Android)</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-sync"></i>
+                            <div>Sincronización inteligente con modo offline</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-qrcode"></i>
+                            <div>Integración con lectores de códigos de barras</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <div>Geolocalización y mapas integrados</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-bell"></i>
+                            <div>Notificaciones push personalizadas</div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <div>Base de datos MySQL gestionada con phpMyAdmin</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div class="comparison-section">
+            <div class="comparison-title">
+                <h3>Comparación de Nuestros Servicios</h3>
+                <p>Encuentra el servicio que mejor se adapta a las necesidades de tu negocio</p>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Sistema de Ventas</th>
+                        <th>Control de Inventario</th>
+                        <th>Desarrollo Web</th>
+                        <th>Aplicaciones Móviles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="feature-name">Facturación electrónica</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-cross">No</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Control de inventario</td>
+                        <td class="feature-check">Básico</td>
+                        <td class="feature-check">Avanzado</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-check">Sí (con integración)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Integración con sistemas externos</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Panel de administración</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                        <td class="feature-check">Sí</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Aplicación móvil</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-cross">No</td>
+                        <td class="feature-check">Sí (iOS y Android)</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Gestión de base de datos</td>
+                        <td class="feature-check">phpMyAdmin</td>
+                        <td class="feature-check">phpMyAdmin</td>
+                        <td class="feature-check">phpMyAdmin</td>
+                        <td class="feature-check">phpMyAdmin</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Soporte técnico 24/7</td>
+                        <td class="feature-cross">Básico (8/5)</td>
+                        <td class="feature-check">Premium (24/7)</td>
+                        <td class="feature-cross">Básico</td>
+                        <td class="feature-cross">Básico</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Tiempo de implementación</td>
+                        <td>2-4 semanas</td>
+                        <td>3-6 semanas</td>
+                        <td>4-8 semanas</td>
+                        <td>6-10 semanas</td>
+                    </tr>
+                    <tr>
+                        <td class="feature-name">Precio inicial</td>
+                        <td>$200/mes</td>
+                        <td>$500/mes</td>
+                        <td>$800 único</td>
+                        <td>$1500 único</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Contact Form -->
+        <div id="contact" class="service-contact">
+            <h3 class="contact-title">¿Necesitas ayuda para elegir el mejor servicio?</h3>
+            <p style="text-align: center; margin-bottom: 1.5rem; color: var(--ds-silver);">Completa el formulario y uno de nuestros especialistas se pondrá en contacto contigo para asesorarte</p>
+            
+            <!-- Mensaje de estado -->
+            <div id="form-message" class="form-message"></div>
+            
+            <form id="contact-form" class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nombre Completo</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Teléfono</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="service">Servicio de Interés</label>
+                    <select id="service" name="service">
+                        <option value="">Seleccione un servicio</option>
+                        <option value="Sistema de Ventas ($200/mes)">Sistema de Ventas ($200/mes)</option>
+                        <option value="Control de Inventario ($500/mes)">Control de Inventario ($500/mes)</option>
+                        <option value="Desarrollo Web ($800 único)">Desarrollo Web ($800 único)</option>
+                        <option value="Aplicaciones Móviles ($1500 único)">Aplicaciones Móviles ($1500 único)</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensaje</label>
+                    <textarea id="message" name="message" placeholder="Cuéntanos sobre tu negocio y necesidades..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">SOLICITAR ASISTENCIA</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Beneficios Clave</h2>
+            <p>Por qué nuestras soluciones transforman tu negocio</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Aumento de Ventas</h3>
+                <p>Sistemas que optimizan procesos de venta, reducen tiempos de atención y mejoran la experiencia del cliente.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <h3>Ahorro de Tiempo</h3>
+                <p>Automatización de procesos manuales que permite enfocar recursos en actividades estratégicas.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Información en Tiempo Real</h3>
+                <p>Reportes y dashboards actualizados al instante para una toma de decisiones informada.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3>Seguridad de Datos</h3>
+                <p>Protección avanzada de información empresarial con respaldos automáticos y protocolos de seguridad.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <h3>Integración Total</h3>
+                <p>Sistemas que se conectan con tus herramientas existentes para un flujo de trabajo unificado.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3>Soporte Continuo</h3>
+                <p>Asistencia técnica especializada y actualizaciones constantes para garantizar el óptimo funcionamiento.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Dev Solutions</h3>
+                <p>Especialistas en desarrollo de sistemas de venta, inventario y soluciones web/móviles para empresas.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <a href="#services">Sistemas de Venta ($200/mes)</a>
+                <a href="#services">Control de Inventario ($500/mes)</a>
+                <a href="#services">Desarrollo Web ($800)</a>
+                <a href="#services">Aplicaciones Móviles ($1500)</a>
+                <a href="#services">Soporte Técnico</a>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces</h3>
+                <a href="home.html">Inicio</a>
+                <a href="#">Servicios</a>
+                <a href="contact.html">Contacto</a>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>San Felipe, Edo Yaracuy, Venezuela</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+584265629095</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>angelepulido25@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Lun-Vie: 9:00 - 18:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Dev Solutions. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // ======================
+        // OTRAS FUNCIONALIDADES
+        // ======================
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(2, 48, 32, 0.95)';
+                header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.background = 'rgba(2, 48, 32, 0.9)';
+                header.style.boxShadow = 'none';
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // ======================
+        // PARTICLE ANIMATION
+        // ======================
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                
+                // Ajustar canvas al contenedor
+                function resizeCanvas() {
+                    const container = canvas.parentElement;
+                    canvas.width = container.clientWidth;
+                    canvas.height = container.clientHeight;
+                }
+                
+                // Clase para partículas
+                class Particle {
+                    constructor() {
+                        this.reset();
+                        this.size = Math.random() * 3 + 1;
+                        this.color = `rgba(0, 255, 0, ${Math.random() * 0.5 + 0.2})`;
+                    }
+                    
+                    reset() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.vx = Math.random() * 2 - 1;
+                        this.vy = Math.random() * 2 - 1;
+                        this.originalSize = Math.random() * 3 + 1;
+                        this.size = this.originalSize;
+                        this.distanceToMouse = 0;
+                    }
+                    
+                    update(mouse) {
+                        // Movimiento básico
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        
+                        // Rebotar en los bordes
+                        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                        
+                        // Interacción con el mouse
+                        if (mouse.x && mouse.y) {
+                            const dx = mouse.x - this.x;
+                            const dy = mouse.y - this.y;
+                            this.distanceToMouse = Math.sqrt(dx * dx + dy * dy);
+                            
+                            // Si el mouse está cerca, empujar la partícula
+                            if (this.distanceToMouse < 150) {
+                                const force = (150 - this.distanceToMouse) / 50;
+                                this.vx -= dx * 0.001 * force;
+                                this.vy -= dy * 0.001 * force;
+                                
+                                // Aumentar tamaño cuando está cerca del cursor
+                                this.size = this.originalSize + (150 - this.distanceToMouse) * 0.05;
+                            } else {
+                                this.size = this.originalSize;
+                            }
+                        } else {
+                            this.size = this.originalSize;
+                        }
+                        
+                        // Desacelerar gradualmente
+                        this.vx *= 0.98;
+                        this.vy *= 0.98;
+                        
+                        // Si la partícula sale de la pantalla, reiniciarla
+                        if (this.x < -50 || this.x > canvas.width + 50 || 
+                            this.y < -50 || this.y > canvas.height + 50) {
+                            this.reset();
+                        }
+                    }
+                    
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.fill();
+                        
+                        // Agregar efecto de resplandor
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
+                        ctx.fillStyle = `rgba(57, 255, 20, ${0.1 * (this.size / this.originalSize)})`;
+                        ctx.fill();
+                    }
+                }
+                
+                // Crear partículas
+                const particles = [];
+                const particleCount = 150;
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+                
+                // Seguimiento del mouse
+                const mouse = {
+                    x: null,
+                    y: null
+                };
+                
+                canvas.addEventListener('mousemove', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    mouse.x = e.clientX - rect.left;
+                    mouse.y = e.clientY - rect.top;
+                });
+                
+                canvas.addEventListener('mouseleave', () => {
+                    mouse.x = null;
+                    mouse.y = null;
+                });
+                
+                // Función de animación
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Dibujar partículas
+                    particles.forEach(particle => {
+                        particle.update(mouse);
+                        particle.draw();
+                        
+                        // Dibujar conexiones entre partículas cercanas
+                        particles.forEach(otherParticle => {
+                            const dx = particle.x - otherParticle.x;
+                            const dy = particle.y - otherParticle.y;
+                            const distance = Math.sqrt(dx * dx + dy * dy);
+                            
+                            if (distance < 100) {
+                                const alpha = 1 - distance / 100;
+                                ctx.beginPath();
+                                ctx.moveTo(particle.x, particle.y);
+                                ctx.lineTo(otherParticle.x, otherParticle.y);
+                                ctx.strokeStyle = `rgba(0, 255, 0, ${alpha * 0.2})`;
+                                ctx.lineWidth = 0.5;
+                                ctx.stroke();
+                            }
+                        });
+                    });
+                    
+                    requestAnimationFrame(animate);
+                }
+                
+                // Iniciar animación
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+                animate();
+            }
+        });
+        
+        // ======================
+        // SERVICIOS INTERACTIVOS
+        // ======================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filtros de servicios
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Actualizar botones activos
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    // Filtrar servicios
+                    const filter = button.getAttribute('data-filter');
+                    
+                    serviceCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Pestañas de detalles de servicio
+            const serviceTabs = document.querySelectorAll('.service-tab');
+            
+            serviceTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    const card = tab.closest('.service-card');
+                    
+                    // Actualizar pestañas en esta tarjeta
+                    card.querySelectorAll('.service-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Mostrar contenido correspondiente
+                    card.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    card.querySelector(`#${tabId}-content`).classList.add('active');
+                });
+            });
+            
+            // ======================
+            // INTEGRACIÓN DE EMAILJS
+            // ======================
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validación básica
+                    const name = document.getElementById('name').value;
+                    const email = document.getElementById('email').value;
+                    
+                    if (!name || !email) {
+                        showMessage('Por favor, completa los campos obligatorios (Nombre y Correo Electrónico)', 'error');
+                        return;
+                    }
+                    
+                    // Mostrar mensaje de envío
+                    showMessage('Enviando tu mensaje...', 'sending');
+                    
+                    // Deshabilitar botón para evitar múltiples envíos
+                    const submitBtn = contactForm.querySelector('.submit-btn');
+                    submitBtn.disabled = true;
+                    
+                    // Enviar formulario con EmailJS
+                    emailjs.sendForm('service_badmy7w', 'template_w9qgyhl', this)
+                        .then(() => {
+                            // Éxito
+                            showMessage('¡Gracias por tu consulta! Uno de nuestros especialistas se pondrá en contacto contigo en breve.', 'success');
+                            contactForm.reset();
+                        })
+                        .catch((error) => {
+                            // Error
+                            console.error('Error al enviar el correo:', error);
+                            showMessage('Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.', 'error');
+                        })
+                        .finally(() => {
+                            // Habilitar el botón de nuevo
+                            submitBtn.disabled = false;
+                        });
+                });
+            }
+            
+            // Función para mostrar mensajes de estado
+            function showMessage(text, type) {
+                if (formMessage) {
+                    formMessage.textContent = text;
+                    formMessage.className = `form-message ${type}`;
+                    formMessage.style.display = 'block';
+                    
+                    // Ocultar el mensaje después de 5 segundos (excepto para mensajes de envío)
+                    if (type !== 'sending') {
+                        setTimeout(() => {
+                            formMessage.style.display = 'none';
+                        }, 5000);
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
